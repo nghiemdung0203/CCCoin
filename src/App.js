@@ -1,18 +1,23 @@
 import React, { useState, useEffect, Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import Coin from './Coin';
 import NewsApi from './NewsApi';
+import Coins from './Coins';
+import {Routes, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
+import CoinRoute from './Route/CoinRoute.js';
 
 class Menu extends Component {
   render() {
     return (
-      <div>
-        <h1> 
-        <button> Menu </button>
-        </h1>
-      </div>
+      <Link to = '/'>
+        <div>
+          <h1> 
+          <button> Menu </button>
+          </h1>
+        </div>
+      </Link>
     );
   }
 }
@@ -62,20 +67,14 @@ function App() {
       <div className = 'newsApi'>
         <NewsApi/>
       </div>
-      {filteredCoins.map(coin => {
-        return (
-          <Coin
-            key={coin.id}
-            name={coin.name}
-            price={coin.current_price}
-            symbol={coin.symbol}
-            marketcap={coin.total_volume}
-            volume={coin.market_cap}
-            image={coin.image}
-            priceChange={coin.price_change_percentage_24h}
-          />
-        );
-      })}
+      <div className='coin-container-route'>
+        <Routes>
+          <Route path='/' element={<Coins filteredCoins={filteredCoins} />} />
+          <Route path = '/coin' element={<CoinRoute/>}>
+            <Route path = ':coinId' element={<CoinRoute />}/>
+          </Route>
+        </Routes>
+      </div>
   
     </div>
   );

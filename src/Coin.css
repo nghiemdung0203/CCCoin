@@ -13,6 +13,12 @@
   width: 900px;
 }
 
+.coin-row:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 .coin {
   display: flex;
   align-items: center;
